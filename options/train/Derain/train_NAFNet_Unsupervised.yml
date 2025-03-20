@@ -1,0 +1,174 @@
+# general settings
+name: train_NAFNET_Derain_unsupervised
+model_type: UnsupervisedModel
+scale: 1
+num_gpu: 1
+manual_seed: 728
+
+# dataset and data loader settings
+datasets:
+  train1:
+    name: Rain100L_test_train
+    type: UnsupervisedDataset
+    dataroot_gt: /root/autodl-tmp/BasicSR-master/datasets/Rain100L_test_train/RainTrainL/norain_sub
+    dataroot_lq: /root/autodl-tmp/BasicSR-master/datasets/Rain100L_test_train/RainTrainL/rain_sub
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+    gt_size: 196
+    use_hflip: true
+    use_rot: true
+
+    # data loader
+    num_worker_per_gpu: 6
+    batch_size_per_gpu: 4
+    dataset_enlarge_ratio: 1
+    prefetch_mode: ~
+
+  train2:
+    name: Rain100L_test_train
+    type: UnsupervisedDataset
+    dataroot_gt: /root/autodl-tmp/BasicSR-master/datasets/Rain100L_test_train/RainTrainL/norain_sub
+    dataroot_lq: /root/autodl-tmp/BasicSR-master/datasets/Rain100L_test_train/RainTrainL/rain_sub
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+    gt_size: 196
+    use_hflip: true
+    use_rot: true
+
+    # data loader
+    num_worker_per_gpu: 6
+    batch_size_per_gpu: 4
+    dataset_enlarge_ratio: 1
+    prefetch_mode: ~
+
+  val:
+    name: Rain100L_test_train
+    type: UnsupervisedDataset
+    dataroot_gt: datasets/Rain100L_test_train/Rain100L/norain
+    dataroot_lq: datasets/Rain100L_test_train/Rain100L/rain
+    io_backend:
+      type: disk
+
+# network structures
+network_ir:
+  type: NAFNet
+  img_channel: 3
+  width: 64
+  middle_blk_num: 1
+  enc_blk_nums: [1, 1, 1, 28]
+  dec_blk_nums: [1, 1, 1, 1]
+
+network_g:
+  type: _NetG_DOWN_init
+  stride: 1
+
+network_d:
+  type: NLayerDiscriminator
+  input_nc: 6
+
+# path
+path:
+  pretrain_network_ir: experiments/Derain_unsupervised_20240111_psnr30.54/models/net_ir_12000_psnr30.66.pth
+  strict_load_ir: true
+  resume_state: ~
+
+  pretrain_network_g: experiments/Derain_unsupervised_20240111_psnr30.54/models/net_g_12000.pth
+  strict_load_g: true
+  resume_state: ~
+
+  pretrain_network_d: experiments/Derain_unsupervised_20240111_psnr30.54/models/net_d_12000.pth
+  strict_load_d: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0.999
+  optim_ir:
+    type: Adam
+    lr: !!float 5e-5
+    weight_decay: 0
+    betas: [0.9, 0.99]
+  optim_g:
+    type: Adam
+    lr: !!float 5e-5
+    weight_decay: 0
+    betas: [0.9, 0.99]
+  optim_d:
+    type: Adam
+    lr: !!float 5e-5
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+  scheduler:
+    type: MultiStepLR
+    milestones: [20000]
+    gamma: 0.5
+
+  total_iter: 30000
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+  ssim_opt:
+    type: log_SSIM_loss
+    loss_weight: 1.0
+  perceptual_opt:
+    type: PerceptualLoss
+    layer_weights:
+      # before relu
+      'conv1_2': 0.1
+      'conv2_2': 0.1
+      'conv3_4': 1
+      'conv4_4': 1
+      'conv5_4': 1
+    vgg_type: vgg19
+    use_input_norm: true
+    perceptual_weight: !!float 1.0
+    style_weight: 0
+    range_norm: false
+    criterion: l1
+  gan_opt:
+    type: UNGANLoss
+    gan_type: lsgan
+    real_label_val: 1.0
+    fake_label_val: 0.0
+    loss_weight: !!float 1
+
+  net_d_iters: 1
+  net_d_init_iters: 0
+
+# validation settings
+val:
+  val_freq: !!float 10000
+  save_img: false
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: true
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 1e3
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500
