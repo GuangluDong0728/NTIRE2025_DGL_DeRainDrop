@@ -16,3 +16,5 @@ To validate the our model, you need to modify the paths in the configuration fil
 ```bash
 python basicsr/test.py -opt options/test/Derain/test.yml
 ```
+# Our Results
+Our results on validation dataset and test dataset can be download at [this link](https://drive.google.com/drive/folders/15MCuydmLbWZ3EhQ5Tjp5G9UveGCuAKcw?usp=sharing).
