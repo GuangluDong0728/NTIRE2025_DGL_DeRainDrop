@@ -21,7 +21,7 @@ network_g:
 
 # path
 path:
-  pretrain_network_g: experiments/NAFNet_CLIP_NTIRE2025_jointtraining_1e-4/models/net_g_40000.pth
+  pretrain_network_g: ~
   strict_load_g: true
   resume_state: ~
   # param_key: params_ema
