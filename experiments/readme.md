@@ -1,2 +1,1 @@
-the download link to our final checkpoint is...
-the download link to the checkpoint of RN50 in CLIP is .. 
+The download link to our final checkpoint is https://drive.google.com/drive/folders/1y2kA1qQcLBHChQKlFzyvIQOmyV0bUq-J?usp=sharing
