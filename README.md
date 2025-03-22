@@ -1,4 +1,18 @@
-# NTIRE2025_DGL_DeRainDrop
+# NTIRE 2025 The First Challenge on Day and Night Raindrop Removal for Dual-Focused Images: DGL_DeRainDrop
+
+# Prepare
+
+1. **Upgrade pip**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+2. **Install the dependencies**
+
+    ```bash
+    python setup.py develop
+    ```
 
 # Downloading Our Weights
 
