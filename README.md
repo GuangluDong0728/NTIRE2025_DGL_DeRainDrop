@@ -1,14 +1,24 @@
-# NTIRE 2025 The First Challenge on Day and Night Raindrop Removal for Dual-Focused Images: DGL_DeRainDrop
+# NTIRE 2025 The First Challenge on Day and Night Raindrop Removal for Dual-Focused Images: GSA2Step by DGL_DeRainDrop 
+## Team Members: </br>
+[Guanglu Dong](https://github.com/GuangluDong0728)\*,
+[Xin Lin](https://linxin0.github.io/)\*,
+Siyuan Liu,
+Tianheng Zheng,
+Jiayu Zhong,
+Shouyi Wang,
+Xiangtai Li,
+Lu Qi,
+Chao Ren
 
-# Prepare
+# Environment prepare
 
-1. **Upgrade pip**
+1. 
 
     ```bash
     pip install -r requirements.txt
     ```
 
-2. **Install the dependencies**
+2. 
 
     ```bash
     python setup.py develop
