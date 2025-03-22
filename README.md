@@ -31,7 +31,7 @@ You can refer to the environment preparation process of [BasicSR](https://github
 # Downloading Our Weights
 
 1. **Download Pretrained Weights:**
-   - Navigate to [this link](https://drive.google.com/drive/folders/1Qfz8cbB9jHcTzAAQEpPn7gvSkuiNnovN?usp=sharing) to access the our weights.
+   - Navigate to [this link](https://drive.google.com/drive/folders/1y2kA1qQcLBHChQKlFzyvIQOmyV0bUq-J?usp=sharing) to access the our weights.
    
 2. **Save to `experiments` Directory:**
    - Once downloaded, place the weights into the `experiments` directory.
