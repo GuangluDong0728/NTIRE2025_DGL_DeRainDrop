@@ -467,88 +467,6 @@ class NAFNet_CLIP_Local(Local_Base, NAFNet_CLIP):
         self.eval()
         with torch.no_grad():
             self.convert(base_size=base_size, train_size=train_size, fast_imp=fast_imp)
-            
-# @ARCH_REGISTRY.register()
-class NAFNet_2Stage(nn.Module):
-
-    def __init__(self, model_path="/root/autodl-tmp/unsupervised deraining/experiments/NAFNet32_NTIRE2025_Deraindrop_finetuning/models/net_g_350000.pth", model_path2="/root/autodl-tmp/unsupervised deraining/experiments/NAFNet32_NTIRE2025_Deblur_finetuning/models/net_g_125000.pth"):
-        super().__init__()
-
-        self.derain = NAFNetLocal(img_channel=3, width=32, middle_blk_num=12, enc_blk_nums=[2, 2, 4, 8], dec_blk_nums=[2, 2, 2, 2])
-        load_pretrained_network(self.derain, model_path, strict=True, weight_keys='params')
-        
-        for params in self.derain.parameters():
-            params.requires_grad = False
-            
-        self.deblur = NAFNetLocal(img_channel=3, width=32, middle_blk_num=12, enc_blk_nums=[2, 2, 4, 8], dec_blk_nums=[2, 2, 2, 2])
-        load_pretrained_network(self.deblur, model_path2, strict=True, weight_keys='params')
-
-        # self.padder_size = 2 ** len(self.encoders)
-
-    def forward(self, inp):
-
-        mid = self.derain(inp)
-        out = self.deblur(mid)
-
-        return out
-    
-@ARCH_REGISTRY.register()
-class NAFNet_2Stage_detail(nn.Module):
-
-    def __init__(self, model_path="/root/autodl-tmp/unsupervised deraining/experiments/NAFNet32_NTIRE2025_Deraindrop_finetuning/models/net_g_350000.pth", model_path2="/root/autodl-tmp/unsupervised deraining/experiments/NAFNet32_NTIRE2025_Deblur_finetuning/models/net_g_125000.pth"):
-        super().__init__()
-
-        self.derain = NAFNetLocal(img_channel=3, width=32, middle_blk_num=12, enc_blk_nums=[2, 2, 4, 8], dec_blk_nums=[2, 2, 2, 2])
-        load_pretrained_network(self.derain, model_path, strict=True, weight_keys='params')
-        
-        for params in self.derain.parameters():
-            params.requires_grad = False
-            
-        self.deblur = NAFNet_CLIP_Local(img_channel=3, width=64, middle_blk_num=1, enc_blk_nums=[1, 1, 1, 28], dec_blk_nums=[1, 1, 1, 1])
-        # load_pretrained_network(self.deblur, model_path2, strict=True, weight_keys='params')
-        
-        # for params2 in self.deblur.parameters():
-        #     params2.requires_grad = False
-        
-        self.detail = NAFNetLocal(img_channel=3, width=32, middle_blk_num=2, enc_blk_nums=[1, 1, 1, 1], dec_blk_nums=[1, 1, 1, 1])
-
-        # self.padder_size = 2 ** len(self.encoders)
-
-    def forward(self, inp):
-        
-        detail = self.detail(inp) 
-
-        mid = self.derain(inp) + detail
-        out = self.deblur(mid) 
-
-        return out
-
-    
-
-    
-# @ARCH_REGISTRY.register()
-class NAFNet_3Stage_detail(nn.Module):
-
-    def __init__(self, model_path="/root/autodl-tmp/unsupervised deraining/experiments/NAFNet64_NTIRE2025_NAFNet_2Stage_detail_onlyL1_3/models/net_g_395000.pth", model_path2="/root/autodl-tmp/unsupervised deraining/experiments/NAFNet32_NTIRE2025_Deblur_finetuning/models/net_g_125000.pth"):
-        super().__init__()
-
-        self.derain_2stage_detail = NAFNet_2Stage_detail()
-        load_pretrained_network(self.derain_2stage_detail, model_path, strict=True, weight_keys='params')
-        
-        for params in self.derain_2stage_detail.parameters():
-            params.requires_grad = False
-        
-        self.detail = NAFNetLocal(img_channel=3, width=64, middle_blk_num=4, enc_blk_nums=[2, 2, 2, 2], dec_blk_nums=[1, 1, 1, 1])
-
-        # self.padder_size = 2 ** len(self.encoders)
-
-    def forward(self, inp):
-        
-        detail = self.detail(inp) 
-
-        out = self.derain_2stage_detail(inp) + detail
-
-        return out
     
 @ARCH_REGISTRY.register()
 class NAFNet_CLIP_2Stage(nn.Module):
@@ -557,14 +475,12 @@ class NAFNet_CLIP_2Stage(nn.Module):
         super().__init__()
 
         self.derain = NAFNetLocal(img_channel=3, width=32, middle_blk_num=12, enc_blk_nums=[2, 2, 4, 8], dec_blk_nums=[2, 2, 2, 2])
-        load_pretrained_network(self.derain, model_path, strict=True, weight_keys='params')
+        # load_pretrained_network(self.derain, model_path, strict=True, weight_keys='params')
         
         # for params in self.derain.parameters():
         #     params.requires_grad = False
             
         self.deblur = NAFNet_CLIP_Local(img_channel=3, width=64, middle_blk_num=1, enc_blk_nums=[1, 1, 1, 28], dec_blk_nums=[1, 1, 1, 1], model_path="/root/autodl-tmp/unsupervised deraining/experiments/RN50.pt")
-
-        # self.padder_size = 2 ** len(self.encoders)
 
     def forward(self, inp):
         
@@ -572,39 +488,6 @@ class NAFNet_CLIP_2Stage(nn.Module):
         out = self.deblur(mid) 
 
         return out
-    
-# # @ARCH_REGISTRY.register()
-# class NAFNet_CLIP(nn.Module):
-
-#     def __init__(self):
-#         super().__init__()
-
-#         self.derain =  NAFNetLocal(img_channel=3, width=64, middle_blk_num=12, enc_blk_nums=[2, 2, 4, 8], dec_blk_nums=[2, 2, 2, 2])
-#         # load_pretrained_network(self.derain_2stage_detail, model_path, strict=True, weight_keys='params')
-        
-#         # for params in self.derain_2stage_detail.parameters():
-#         #     params.requires_grad = False
-        
-#         self.detail = CLIPDenoising()
-
-#         self.padder_size = 2 ** 4
-
-#     def forward(self, inp):
-#         B, C, H, W = inp.shape
-#         inp = self.check_image_size(inp)
-
-#         out_mid = self.derain(inp)
-#         out_final = self.detail(out_mid) + out_mid
-
-#         return out_mid, out_final[:, :, :H, :W]
-
-#     def check_image_size(self, x):
-#         _, _, h, w = x.size()
-#         mod_pad_h = (self.padder_size - h % self.padder_size) % self.padder_size
-#         mod_pad_w = (self.padder_size - w % self.padder_size) % self.padder_size
-#         x = F.pad(x, (0, mod_pad_w, 0, mod_pad_h))
-#         return x
-
 
 if __name__ == '__main__':
     img_channel = 3
