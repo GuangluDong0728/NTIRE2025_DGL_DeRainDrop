@@ -10,7 +10,8 @@ Xiangtai Li,
 Lu Qi,
 Chao Ren
 
-## Our code is implemented based on [BasicSR](https://github.com/XPixelGroup/BasicSR). The network structure of our designed GSA2Step is in "class NAFNet_CLIP_2Stage(nn.Module)" of `basicsr/archs/NAFNet_arch.py`, and the test configuration file is in `options/test/Derain/test.yml`. Please place the dataset in the `datasets` folder and modify the configuration file to test our model according to the following proces.
+## Introduction:
+Our code is implemented based on [BasicSR](https://github.com/XPixelGroup/BasicSR). The network structure of our designed GSA2Step is in "class NAFNet_CLIP_2Stage(nn.Module)" of `basicsr/archs/NAFNet_arch.py`, and the test configuration file is in `options/test/Derain/test.yml`. Please place the dataset in the `datasets` folder and modify the configuration file to test our model according to the following process.
 
 # Environment prepare
 You can refer to the environment preparation process of [BasicSR](https://github.com/XPixelGroup/BasicSR), which mainly includes the following two steps:
