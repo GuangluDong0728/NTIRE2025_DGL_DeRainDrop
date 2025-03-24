@@ -16,7 +16,7 @@ Our code is implemented based on [BasicSR](https://github.com/XPixelGroup/BasicS
 ## Our Network Structure
 Our GSA2Step framework is detailed in figure below, and it mainly includes 3 modules: 2 NAFNet (a 32 width version and a 64 width version), a global semantic attention (GSA) module, and a CLIP image encoder.
 <p align="center">
-<img src="assets/F1.png" :height="500px">
+<img src="assets/F1.png" :height="100px">
 
 # Environment Prepare
 You can refer to the environment preparation process of [BasicSR](https://github.com/XPixelGroup/BasicSR), which mainly includes the following two steps:
