@@ -9,6 +9,11 @@ Shouyi Wang,
 Xiangtai Li,
 Lu Qi,
 Chao Ren
+\textsuperscript{1}Sichuan University \qquad
+\textsuperscript{2}UCSD\\
+\textsuperscript{3}Tieling Power Supply Company\\
+\textsuperscript{4}Nanyang Technological University\qquad
+\textsuperscript{5}Insta360 Research\\
 
 ## Introduction:
 Our code is implemented based on [BasicSR](https://github.com/XPixelGroup/BasicSR). The network structure of our designed GSA2Step is in "class NAFNet_CLIP_2Stage(nn.Module)" of `basicsr/archs/NAFNet_arch.py`, and the test configuration file is in `options/test/Derain/test.yml`. Please place the dataset in the `datasets` folder and modify the configuration file to test our model according to the following process.
