@@ -8,7 +8,8 @@ Jiayu Zhong $^{1}$,
 Shouyi Wang $^{1}$,
 Xiangtai Li $^{4}$,
 Lu Qi $^{5}$,
-Chao Ren $^{1}$//
+Chao Ren $^{1}$
+
 $^{1}$ Sichuan University,
 $^{2}$ UCSD,
 $^{3}$ Tieling Power Supply Company,
