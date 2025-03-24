@@ -1,14 +1,14 @@
 # NTIRE 2025 The First Challenge on Day and Night Raindrop Removal for Dual-Focused Images: GSA2Step by DGL_DeRainDrop 
 ## Team Members: </br>
-[Guanglu Dong](https://github.com/GuangluDong0728)$^{1}$\*,
-[Xin Lin](https://linxin0.github.io/)$^{2}$,
+[Guanglu Dong](https://github.com/GuangluDong0728) $^{1}$\*,
+[Xin Lin](https://linxin0.github.io/) $^{2}$,
 Siyuan Liu $^{3}$,
 Tianheng Zheng $^{1}$,
 Jiayu Zhong $^{1}$,
 Shouyi Wang $^{1}$,
 Xiangtai Li $^{4}$,
 Lu Qi $^{5}$,
-Chao Ren $^{1}$
+Chao Ren $^{1}$\\
 $^{1}$ Sichuan University,
 $^{2}$ UCSD,
 $^{3}$ Tieling Power Supply Company,
