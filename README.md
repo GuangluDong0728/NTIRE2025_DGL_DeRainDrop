@@ -1,19 +1,19 @@
 # NTIRE 2025 The First Challenge on Day and Night Raindrop Removal for Dual-Focused Images: GSA2Step by DGL_DeRainDrop 
 ## Team Members: </br>
 [Guanglu Dong](https://github.com/GuangluDong0728)$^{1}$\*,
-[Xin Lin](https://linxin0.github.io/),
-Siyuan Liu,
-Tianheng Zheng,
-Jiayu Zhong,
-Shouyi Wang,
-Xiangtai Li,
-Lu Qi,
-Chao Ren
-\textsuperscript{1}Sichuan University \qquad
-\textsuperscript{2}UCSD\\
-\textsuperscript{3}Tieling Power Supply Company\\
-\textsuperscript{4}Nanyang Technological University\qquad
-\textsuperscript{5}Insta360 Research\\
+[Xin Lin](https://linxin0.github.io/)$^{2}$,
+Siyuan Liu$^{3}$,
+Tianheng Zheng$^{1}$,
+Jiayu Zhong$^{1}$,
+Shouyi Wang$^{1}$,
+Xiangtai Li$^{4}$,
+Lu Qi$^{5}$,
+Chao Ren$^{1}$
+$^{1}$Sichuan University \qquad
+$^{2}$UCSD\\
+$^{3}$Tieling Power Supply Company\\
+$^{4}$Nanyang Technological University\qquad
+$^{5}$Insta360 Research\\
 
 ## Introduction:
 Our code is implemented based on [BasicSR](https://github.com/XPixelGroup/BasicSR). The network structure of our designed GSA2Step is in "class NAFNet_CLIP_2Stage(nn.Module)" of `basicsr/archs/NAFNet_arch.py`, and the test configuration file is in `options/test/Derain/test.yml`. Please place the dataset in the `datasets` folder and modify the configuration file to test our model according to the following process.
