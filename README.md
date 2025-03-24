@@ -14,8 +14,9 @@ Chao Ren
 Our code is implemented based on [BasicSR](https://github.com/XPixelGroup/BasicSR). The network structure of our designed GSA2Step is in "class NAFNet_CLIP_2Stage(nn.Module)" of `basicsr/archs/NAFNet_arch.py`, and the test configuration file is in `options/test/Derain/test.yml`. Please place the dataset in the `datasets` folder and modify the configuration file to test our model according to the following process.
 
 ## Our Network Structure
-Our GSA2Step framework is detailed in figure below, and it mainly includes 3 modules: 2 NAFNet (a 32 width version and a 64 width version), a global semantic attention (GSA) module, and a CLIP~\cite{CLIP} image encoder.
+Our GSA2Step framework is detailed in figure below, and it mainly includes 3 modules: 2 NAFNet (a 32 width version and a 64 width version), a global semantic attention (GSA) module, and a CLIP image encoder.
 ![alt text](assets/F1.png)
+<img src="assets/F1.png";" :height="40px" width="40px">
 
 # Environment Prepare
 You can refer to the environment preparation process of [BasicSR](https://github.com/XPixelGroup/BasicSR), which mainly includes the following two steps:
